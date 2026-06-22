@@ -38,7 +38,7 @@ jobs:
       has-vitest:     ${{ steps.check.outputs.has-vitest }}
       has-playwright: ${{ steps.check.outputs.has-playwright }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Check for project files
         id: check
         run: |
@@ -89,7 +89,7 @@ jobs:
       needs.detect.outputs.has-vite == 'true' &&
       (github.event.pull_request.draft == false || github.event_name != 'pull_request')
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
@@ -106,7 +106,7 @@ jobs:
       needs.detect.outputs.has-vite == 'true' &&
       (github.event.pull_request.draft == false || github.event_name != 'pull_request')
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
@@ -138,7 +138,7 @@ jobs:
       needs.typecheck.result == 'success' &&
       needs.lint.result == 'success'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
@@ -156,7 +156,7 @@ jobs:
             echo "   pnpm add -D vitest @vitest/coverage-v8"
           fi
       - name: Upload coverage
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         if: needs.detect.outputs.has-vitest == 'true'
         with:
           files: ./coverage/lcov.info
@@ -168,7 +168,7 @@ jobs:
     needs: test
     if: needs.test.result == 'success'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
@@ -191,7 +191,7 @@ jobs:
       needs.build.result == 'success' &&
       needs.detect.outputs.has-playwright == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
@@ -219,7 +219,7 @@ jobs:
       needs.detect.outputs.has-vite == 'true' &&
       needs.build.result == 'success'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Trivy Dockerfile scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -234,7 +234,7 @@ jobs:
     needs: detect
     if: needs.detect.outputs.has-lockfile == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v6
         with:
